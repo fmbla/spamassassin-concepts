@@ -4,19 +4,23 @@ Spamassassin Concepts is a plug in that canonicalises emails into their basic co
 It offers a simple alternative to the native SA meta rules, by being easier to write and understand.
 
 ##Installation
+
  - Download zip
  - Move to spamassassin location
 	 - Usually /etc/mail/spamassassin or /etc/spamassassin
  - Make sure [Bayes](https://wiki.apache.org/spamassassin/BayesFaq) is enabled
  - Update Concepts.cf with correct path to the concepts directory
  - Restart Spamassassin
+
 ###Testing Installation
+
 With a test email run spamassassin in debug mode, searching for the *Concepts* keyword
 
     $ spamassassin -D -t testemail 2>&1 | grep Concepts
     ...
     [12201] dbg: plugin: loading Mail::SpamAssassin::Plugin::Concepts from /etc/spamassassin/Concepts.pm
     ...
+
 This means the plugin has loaded.
 You should also get an output with a digest of the concepts gained from your example email
 
@@ -25,6 +29,7 @@ You should also get an output with a digest of the concepts gained from your exa
 For problems please follow the error messages
 
 ##Usage
+
 In day to day life you do not need to interact with Concepts - Bayes will automatically keep up to date with what is considered good and bad as long as you classify your spam and ham carefully.
 
 **Be careful with manual scoring!!! By design concepts can hit both ham and spam emails - including combinations you couldn't imagine! **
