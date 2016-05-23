@@ -1,7 +1,7 @@
 #Spamassassin Concepts
 ----------
 Spamassassin Concepts is a plug in that canonicalises emails into their basic concepts. These concepts are then available to Bayes to work with as well as being available via meta scoring.
-It offers a simple alternative to the native SA meta rules which are easier to write and understand.
+It offers a simple alternative to the native SA meta rules, by being easier to write and understand.
 
 ##Installation
  - Download zip
