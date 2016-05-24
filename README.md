@@ -68,12 +68,32 @@ Normally logs will not show, however by switching logging to debug mode you will
     May 22 23:12:47 spamfilter spamd[10502]: metadata: X-SA-Concepts: friend google india linkedin boost america phone-num money search-eng optout time-ref home invest internet store apple member re important details email-adr please asian security news newsletter day-of-week
     May 22 23:12:47 spamfilter spamd[7459]: metadata: X-SA-Concepts: offer search-eng optout facebook enjoy details discount doitnow hello price watches https sale twitter sentfrom contact time-ref deal woman great home deals store health camera click game please email-adr
 
+###Concept file format
+
+Consider the following file named **viagra**
+
+    1
+    viagra
+    v[jl1]agra
+
+The file is parsed in the following way.
+
+The **concept name** will be the file name. Please refrain from special characters here - alpha-numeric and -_ are fine.
+The **first line** of the file dictates how many matches within the file need to be true to mark the email as containing the *concept name*
+The rest of the file contains **regex** lines that are wrapped within **/$regex/ig** to match lines out of the body of the email.
+
+###What is checked
+The email body is pre-stripped of all of it's HTML and other un-needed tags to become plain text. To that we add the subject as well as a few other header items.
+This text is concatenated and then checked against the *regex lines* specified in concept files.
+You can add additional header fields with the **concepts_headers** directive.
 
 ##Change Log
 ###Version 0.02
  - Bug fixes from SA user list - David Jones
+
 ###Version 0.01
  - Initial release
  - 250 concept files - Thanks Marc Perkel
  - Native tags and Bayes integration
  - Native meta rules based on concepts
+
