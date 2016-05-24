@@ -3,6 +3,8 @@
 Spamassassin Concepts is a plug in that canonicalises emails into their basic concepts. These concepts are then available to Bayes to work with as well as being available via meta scoring.
 It offers a simple alternative to the native SA meta rules, by being easier to write and understand.
 
+SA plugin adapted from [http://wiki.junkemailfilter.com/index.php/Concept_Parsing_Spam_Filter](http://wiki.junkemailfilter.com/index.php/Concept_Parsing_Spam_Filter)
+
 ##Installation
 
  - Download zip
@@ -68,8 +70,10 @@ Normally logs will not show, however by switching logging to debug mode you will
 
 
 ##Change Log
+###Version 0.02
+ - Bug fixes from SA user list - David Jones
 ###Version 0.01
  - Initial release
- - 250 concept files
+ - 250 concept files - Thanks Marc Perkel
  - Native tags and Bayes integration
  - Native meta rules based on concepts
