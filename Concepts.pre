@@ -1,0 +1,2 @@
+loadplugin Mail::SpamAssassin::Plugin::Concepts Concepts.pm
+

@@ -1,0 +1,18 @@
+# Path to the directory where concepts are stored
+concepts_dir /etc/mail/spamassassin/concepts
+
+# Example configs - handy if want to give an extra nudge to a concept or combination of
+#header TEST_CONCEPTS X-SA-Concepts =~ /\braw-tags\b/
+#describe TEST_CONCEPTS Tester Concepts rule
+#score TEST_CONCEPTS 0.01
+
+# Or combinations
+#header __CONCEPTS_GOD X-SA-Concepts =~ /\bgod\b/
+#header __CONCEPTS_AFRICA X-SA-Concepts =~ /\bafrica\b/
+#header __CONCEPTS_LOTSMONEY X-SA-Concepts =~ /\lotsofmoney\b/
+#header __CONCEPTS_STRANGER X-SA-Concepts =~ /\bstranger\b/
+#header __CONCEPTS_DYING X-SA-Concepts =~ /\bdying\b/
+
+#meta AFRICAN_GOD_LOTSAMONEY_STRANGERS_DYING (__CONCEPTS_GOD + __CONCEPTS_AFRICA + __CONCEPTS_LOTSMONEY + __CONCEPTS_STRANGER + __CONCEPTS_DYING >= 4)
+#describe AFRICAN_GOD_LOTSAMONEY_STRANGERS_DYING Combo
+#score AFRICAN_GOD_LOTSAMONEY_STRANGERS_DYING 1.0
