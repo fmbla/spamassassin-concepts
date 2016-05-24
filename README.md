@@ -8,10 +8,9 @@ SA plugin adapted from [http://wiki.junkemailfilter.com/index.php/Concept_Parsin
 ##Installation
 
  - Download zip / Clone repo
- - Move to Concepts.pm, Concepts.cf and Concepts.pre to spamassassin location
+ - Move to contents to spamassassin location
 	 - Usually /etc/mail/spamassassin or /etc/spamassassin
- - Move concepts directory to a directory readable by spamassassin
-	 - Update Concepts.cf with correct path to the concepts directory
+ - Update Concepts.cf with correct path to the concepts directory
  - Do the test as below
  - Make sure [Bayes](https://wiki.apache.org/spamassassin/BayesFaq) is enabled
  - Restart Spamassassin
@@ -24,8 +23,10 @@ With a test email run spamassassin in debug mode, searching for the *Concepts* k
     ...
     [12201] dbg: plugin: loading Mail::SpamAssassin::Plugin::Concepts from /etc/spamassassin/Concepts.pm
     ...
+    [12201] dbg: Concepts: 256 concepts loaded
 
 This means the plugin has loaded.
+
 You should also get an output with a digest of the concepts gained from your example email
 
     [12201] dbg: Concepts: metadata: X-SA-Concepts: service madam dear stranger invest sir reply2me please email-adr
