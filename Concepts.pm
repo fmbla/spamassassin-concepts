@@ -81,11 +81,11 @@ sub extract_metadata {
 
   foreach (split(' ', $opts->{conf}->{concepts_headers})) {
     if (my $headl = $pms->get($_)) {
-      push $body, $headl;
+      push @$body, $headl;
     }
   }
 
-  push $body, $pms->get('From:name');
+  push @$body, $pms->get('From:name');
   push @$body, @{$pms->get_decoded_stripped_body_text_array()};
 
   my $matched_concepts={};
