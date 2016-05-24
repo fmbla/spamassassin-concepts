@@ -41,6 +41,7 @@ In day to day life you do not need to interact with Concepts - Bayes will automa
 
 If you would like to interact with Concepts you can in the form of meta rules to give matching email additional weighting
 
+    ## JUST AN EXAMPLE!!!
     header __CONCEPTS_GOD X-SA-Concepts =~ /\bgod\b/
     header __CONCEPTS_AFRICA X-SA-Concepts =~ /\bafrica\b/
     header __CONCEPTS_LOTSMONEY X-SA-Concepts =~ /\blotsofmoney\b/
