@@ -72,6 +72,7 @@ Normally logs will not show, however by switching logging to debug mode you will
 ##Change Log
 ###Version 0.02
  - Bug fixes from SA user list - David Jones
+
 ###Version 0.01
  - Initial release
  - 250 concept files - Thanks Marc Perkel
