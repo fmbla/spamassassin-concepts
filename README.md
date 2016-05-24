@@ -68,7 +68,7 @@ Normally logs will not show, however by switching logging to debug mode you will
 
 
 ##Change Log
-###Version 0.1
+###Version 0.01
  - Initial release
  - 250 concept files
  - Native tags and Bayes integration
