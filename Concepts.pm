@@ -90,7 +90,7 @@ sub extract_metadata {
 
   my $matched_concepts={};
 
-  foreach my $key (keys $opts->{conf}->{concepts_storage}) {
+  foreach my $key (keys %{$opts->{conf}->{concepts_storage}}) {
     foreach my $breg (@{$opts->{conf}->{concepts_storage}{$key}{'body_rules'}}) {
       if( grep /\b$breg\b/ig, @$body ) {
         $matched_concepts->{$key}++;
@@ -101,7 +101,7 @@ sub extract_metadata {
 
   my $concepts = '';
 
-  foreach my $key (keys $matched_concepts) {
+  foreach my $key (keys %{$matched_concepts}) {
     if ($matched_concepts->{$key} >= $opts->{conf}->{concepts_storage}{$key}{'count'}) {
       $concepts .= "$key ";
     }
@@ -165,13 +165,13 @@ sub read_concept_files {
 
     while(my $re = <RELIST>) {
       chomp $re;
-      push $concepts->{$conceptname}->{'body_rules'}, $re if $re ne '';
+      push @{$concepts->{$conceptname}->{'body_rules'}}, $re if $re ne '';
     }
 
     close RELIST;
   }
 
-  my $loaded = keys $concepts;
+  my $loaded = keys %{$concepts};
   dbg("$loaded concepts loaded");
 
   $concepts;
