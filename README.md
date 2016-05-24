@@ -7,11 +7,13 @@ SA plugin adapted from [http://wiki.junkemailfilter.com/index.php/Concept_Parsin
 
 ##Installation
 
- - Download zip
- - Move to spamassassin location
+ - Download zip / Clone repo
+ - Move to Concepts.pm, Concepts.cf and Concepts.pre to spamassassin location
 	 - Usually /etc/mail/spamassassin or /etc/spamassassin
+ - Move concepts directory to a directory readable by spamassassin
+	 - Update Concepts.cf with correct path to the concepts directory
+ - Do the test as below
  - Make sure [Bayes](https://wiki.apache.org/spamassassin/BayesFaq) is enabled
- - Update Concepts.cf with correct path to the concepts directory
  - Restart Spamassassin
 
 ###Testing Installation
@@ -81,7 +83,7 @@ The file is parsed in the following way.
  - The **concept name** will be the file name. Please refrain from special characters here - alpha-numeric and -_ are fine.
  - The **first line** of the file dictates how many matches within the file need to be true to mark the email as containing the *concept name*
  - The rest of the file contains **regex lines** that are each wrapped internally with the following: **/$regex/ig** 
- - The **body** (and other parts) is check against the regexes specified.
+ - The **body** (and other parts) are check against the regexes specified.
 
 ###What is checked
 The email body is pre-stripped of all of it's HTML and other un-needed tags to become plain text. To that we add the subject as well as a few other header items.
