@@ -1,0 +1,4 @@
+2
+product\s
+(best|amazing|new|this) .{0,9}product
+featured product

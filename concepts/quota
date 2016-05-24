@@ -1,0 +1,33 @@
+3
+(mail|e-?mail|mailbox|webmail) .{0,15}(quota|limit|full)
+increase .{0,9}(mailbox|quota|webmail)
+e-?mail (users|subscribers)
+close .{0,9}account
+failure to
+increase .{0,9}quota
+must comply
+inconvenience
+notify you
+mailbox manager
+has exceeded
+be limited
+may result in
+reactivate.{0,10}account
+webmail account
+verify|verification.{0,10}(email|address)
+not be able to
+mailbox manager
+click (here|the link)
+(storage|quota) limit
+upgrade .{0,12}email
+(email|webmail|set) quota
+exceeded .{0,15}(limit|quota)
+storage limit
+quota upgrade
+mailbox space
+be able to send
+more disk space
+login to your account
+resolve this issue
+your mailbox
+Validate

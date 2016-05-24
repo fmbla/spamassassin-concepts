@@ -1,0 +1,23 @@
+4
+full name(s)?
+(contact|your|residential) address
+(tele|cell|mobile) ?(phone|number)
+mobile phone
+occupation
+marital status
+your age
+your name
+your picture
+\sage\W
+date of birth
+Country of Residence
+account (number|details)
+passport
+id card
+office phone
+cell (phone|number)
+fax
+personal information
+drivers license
+private telephone
+photo id

@@ -1,0 +1,9 @@
+2
+diabetes
+diabetic
+diabeties breakthrough
+(diabeties|diabetic) .{0,15}(cure|breakthrough)
+insulin
+finger prick
+glucose
+blood sugar

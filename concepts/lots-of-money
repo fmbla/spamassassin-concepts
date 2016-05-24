@@ -1,0 +1,13 @@
+2
+the sum of
+(billion|million|thousand) .{0,20}(dollars|pounds|euros|usd)
+,000 (usd|euros)
+gold
+this money
+(\d\d0,000|\d,\d00.00)
+(united state(s)?|us|american) dollars
+pounds sterling
+british pounds
+us(d)?\$
+huge amount of money
+

@@ -1,0 +1,18 @@
+1
+my name is
+(dear|attn|attention) .{0,10}(friend|stock|IT |Internet|candidate|sirs?|madam|partner|investor|beloved|travell?er|car shopper|web|reader|stock|president|ceo|manager|business|domain|(valued )?client|beneficiary)
+introdic(e|ing) (myself|ourselves)
+(hi|hello) (dear|friend)
+i am (a|an)\b
+(i am|i'm) (mr.|ms.|mrs)
+greetings
+my dearest
+introduc(e|ing) myself
+hi there
+\bhi,
+hello[,!]
+greeting
+good day
+contacting you
+my dear one
+contact(ed|ing) you

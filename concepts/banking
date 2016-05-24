@@ -1,0 +1,28 @@
+2
+qualify .{0,15} (receive|loan)
+bank account
+transfer funds
+funds transfer
+wire transfer
+release .{0,9} funds
+(apply|receive|get|offer(s)?|private) .{0,15} loan
+loan .{0,15}(processed|department|amount|lenders)
+interest rate
+no collateral
+local bank
+letter of authorization
+the sum of
+bank plc
+transfer.{0,15}(?:money|fund|bank)
+(money|fund).{0.15}transfer
+security company
+consignment
+bank .{0,15} (africa|nigeria)
+atm card
+bank draft
+loan service
+loan rates
+(home|student|car|personal|business) loan
+repayment terms
+certificate of deposit
+lower your mortgage

@@ -1,0 +1,12 @@
+1
+order (now|soon|fast|quickly|while|today)
+(act|call|get it|join|sign.?up|register|subscribe|click|apply|do it|order|start|enter|purchase|buy|save|respond|play|download|visit) (now|today)
+(urgent|prompt) (response|reply|conformation)
+immediate (contact|attention)
+contact .{0,8}immediately
+offer expires
+urgent
+limited time
+rewards today
+What are you waiting for
+right now
