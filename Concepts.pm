@@ -27,35 +27,47 @@ sub dbg { Mail::SpamAssassin::Plugin::dbg ("Concepts: @_"); }
 
 sub new
 {
-    my ($class, $mailsa) = @_;
+  my ($class, $mailsa) = @_;
 
-    $class = ref($class) || $class;
-    my $self = $class->SUPER::new($mailsa);
-    bless ($self, $class);
+  $class = ref($class) || $class;
+  my $self = $class->SUPER::new($mailsa);
+  bless ($self, $class);
 
-    $self->set_config($mailsa->{conf});
-    $self->register_eval_rule("check_concepts");
+  $self->set_config($mailsa->{conf});
+  $self->register_eval_rule("check_concepts");
 
-    $self;
+  $self;
 }
 
 sub set_config {
-    my ($self, $conf) = @_;
-    my @cmds = ();
-    push(@cmds, {
-        setting => 'concepts_dir',
-        default => '/opt/concepts',
-        type => $Mail::SpamAssassin::Conf::CONF_TYPE_STRING,
-        }
-    );
-    $conf->{parser}->register_commands(\@cmds);
+  my ($self, $conf) = @_;
+  my @cmds = ();
+  push(@cmds, {
+    setting => 'concepts_dir',
+    default => '/opt/concepts',
+    type => $Mail::SpamAssassin::Conf::CONF_TYPE_STRING,
+    }
+  );
+  push(@cmds, {
+    setting => 'concepts_storage',
+    default => {},
+    type => $Mail::SpamAssassin::Conf::CONF_TYPE_HASH_KEY_VALUE,
+    }
+  );
+  push(@cmds, {
+    setting => 'concepts_headers',
+    default => '',
+    type => $Mail::SpamAssassin::Conf::CONF_TYPE_HASH_KEY_VALUE,
+    }
+  );
+
+  $conf->{parser}->register_commands(\@cmds);
 }
 
-sub check_start {
-  my ($self, $params) = @_;
-  my $pms = $params->{permsgstatus};
-
-  $self->{concepts} = $self->read_concept_files($pms);
+sub finish_parsing_start {
+  my ($self, $opts) = @_;
+  my $dir = $opts->{conf}->{concepts_dir};
+  $opts->{conf}->{concepts_storage} = $self->read_concept_files($dir);
 }
 
 sub extract_metadata {
@@ -66,26 +78,31 @@ sub extract_metadata {
   return unless ($msg->can ("put_metadata"));
 
   my $body = [];
-  push $body, $pms->get('From:name'); 
-  push @$body, @{$pms->get_decoded_stripped_body_text_array()};
 
-  foreach (@$body) { 
-    dbg($_);
+  foreach (split(' ', $opts->{conf}->{concepts_headers})) {
+    if (my $headl = $pms->get($_)) {
+      push $body, $headl;
+    }
   }
 
-  my $bodyc = join("\n", @$body);
+  push $body, $pms->get('From:name');
+  push @$body, @{$pms->get_decoded_stripped_body_text_array()};
+
   my $matched_concepts={};
 
-  foreach my $key (keys $self->{concepts}) {
-    foreach my $breg (@{$self->{concepts}{$key}{'body_rules'}}) {
-      $matched_concepts->{$key}+=grep (/\b$breg\b/ig, $bodyc);
+  foreach my $key (keys $opts->{conf}->{concepts_storage}) {
+    foreach my $breg (@{$opts->{conf}->{concepts_storage}{$key}{'body_rules'}}) {
+      if( grep /\b$breg\b/ig, @$body ) {
+        $matched_concepts->{$key}++;
+      }
+
     }
   }
 
   my $concepts = '';
 
   foreach my $key (keys $matched_concepts) {
-    if ($matched_concepts->{$key} >= $self->{concepts}{$key}{'count'}) {
+    if ($matched_concepts->{$key} >= $opts->{conf}->{concepts_storage}{$key}{'count'}) {
       $concepts .= "$key ";
     }
   }
@@ -118,49 +135,51 @@ sub parsed_metadata {
 }
 
 sub read_concept_files {
-   my ($pms) = @_;
+  my ($self,$dir) = @_;
 
-    my $dir = $pms->{main}->{conf}->{concepts_dir};
-    my @files = glob("$dir/*");
+  my @files = glob("$dir/*");
 
-    my $concepts = {};
+  my $concepts = {};
 
-    foreach my $file (@files) {
+  foreach my $file (@files) {
 
-        next unless ( -e $file );
+    next unless ( -e $file );
 
-        unless ( -r $file ) {
-            warnlog("Cannot read \"$file\"\n Please check file path and permissions are correct");
-            next;
-        }
-    
-        open RELIST, "<$file";
-
-        my ($conceptname) = basename $file;
-        $conceptname =~ s/[\s]/_/g;
-
-        $concepts->{$conceptname} = {};
-
-        my ($count) = split /:/, <RELIST>, 1;
-
-        $concepts->{$conceptname}->{'count'} = $count;
-        $concepts->{$conceptname}->{'body_rules'} = [];
-
-        while(my $re = <RELIST>) {
-            chomp $re;
-            push $concepts->{$conceptname}->{'body_rules'}, $re if $re ne '';
-        }
+    unless ( -r $file ) {
+      warnlog("Cannot read \"$file\"\n Please check file path and permissions are correct");
+      next;
     }
 
-    my $lcount = keys $concepts;
-    dbg("$lcount concepts loaded");
 
-    $concepts;
+    my ($conceptname) = basename $file;
+    $conceptname =~ s/[\s]/_/g;
+
+    $concepts->{$conceptname} = {};
+
+    open RELIST, "<$file";
+
+    my ($count) = split /:/, <RELIST>, 1;
+
+    $concepts->{$conceptname}->{'count'} = $count;
+    $concepts->{$conceptname}->{'body_rules'} = [];
+
+    while(my $re = <RELIST>) {
+      chomp $re;
+      push $concepts->{$conceptname}->{'body_rules'}, $re if $re ne '';
+    }
+
+    close RELIST;
+  }
+
+  my $loaded = keys $concepts;
+  dbg("$loaded concepts loaded");
+
+  $concepts;
 }
 
 sub check_concepts
 {
-    return 0;
+  return 0;
 }
 
 1;
