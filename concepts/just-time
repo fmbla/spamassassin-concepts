@@ -1,0 +1,9 @@
+1
+just seconds
+just [0-9]+ seconds
+just minutes
+just [0-9]+ minutes
+just hours
+just [0-9]+ hours
+just days
+just [0-9]+ days
