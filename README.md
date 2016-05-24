@@ -43,7 +43,7 @@ If you would like to interact with Concepts you can in the form of meta rules to
 
     header __CONCEPTS_GOD X-SA-Concepts =~ /\bgod\b/
     header __CONCEPTS_AFRICA X-SA-Concepts =~ /\bafrica\b/
-    header __CONCEPTS_LOTSMONEY X-SA-Concepts =~ /\lotsofmoney\b/
+    header __CONCEPTS_LOTSMONEY X-SA-Concepts =~ /\blotsofmoney\b/
     header __CONCEPTS_STRANGER X-SA-Concepts =~ /\bstranger\b/
     header __CONCEPTS_DYING X-SA-Concepts =~ /\bdying\b/
     
