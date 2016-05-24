@@ -78,13 +78,15 @@ Consider the following file named **viagra**
 
 The file is parsed in the following way.
 
-The **concept name** will be the file name. Please refrain from special characters here - alpha-numeric and -_ are fine.
-The **first line** of the file dictates how many matches within the file need to be true to mark the email as containing the *concept name*
-The rest of the file contains **regex** lines that are wrapped within **/$regex/ig** to match lines out of the body of the email.
+ - The **concept name** will be the file name. Please refrain from special characters here - alpha-numeric and -_ are fine.
+ - The **first line** of the file dictates how many matches within the file need to be true to mark the email as containing the *concept name*
+ - The rest of the file contains **regex** lines that are wrapped within **/$regex/ig** to match lines out of the body of the email.
 
 ###What is checked
 The email body is pre-stripped of all of it's HTML and other un-needed tags to become plain text. To that we add the subject as well as a few other header items.
+
 This text is concatenated and then checked against the *regex lines* specified in concept files.
+
 You can add additional header fields with the **concepts_headers** directive.
 
 ##Change Log
