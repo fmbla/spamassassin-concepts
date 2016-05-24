@@ -80,7 +80,8 @@ The file is parsed in the following way.
 
  - The **concept name** will be the file name. Please refrain from special characters here - alpha-numeric and -_ are fine.
  - The **first line** of the file dictates how many matches within the file need to be true to mark the email as containing the *concept name*
- - The rest of the file contains **regex** lines that are wrapped within **/$regex/ig** to match lines out of the body of the email.
+ - The rest of the file contains **regex lines** that are each wrapped internally with the following: **/$regex/ig** 
+ - The **body** (and other parts) is check against the regexes specified.
 
 ###What is checked
 The email body is pre-stripped of all of it's HTML and other un-needed tags to become plain text. To that we add the subject as well as a few other header items.
