@@ -95,6 +95,9 @@ This text is concatenated and then checked against the *regex lines* specified i
 You can add additional header fields with the **concepts_headers** directive.
 
 ##Change Log
+###Version 0.03
+ - Code optimisation
+
 ###Version 0.02
  - Bug fixes from SA user list - David Jones
 

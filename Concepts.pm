@@ -27,7 +27,7 @@ Paul Stead <paul.stead@gmail.com>
 =cut
 
 package Mail::SpamAssassin::Plugin::Concepts;
-my $VERSION = 0.02;
+my $VERSION = 0.03;
 
 use strict;
 use Mail::SpamAssassin::Plugin;
@@ -101,21 +101,17 @@ sub extract_metadata {
   push @$body, $pms->get('From:name');
   push @$body, @{$pms->get_decoded_stripped_body_text_array()};
 
-  my $matched_concepts={};
+  my $concepts = '';
+  my $bodyc = join("\n", @$body);
 
   foreach my $key (keys %{$opts->{conf}->{concepts_storage}}) {
+    my $concept_count=0;
     foreach my $breg (@{$opts->{conf}->{concepts_storage}{$key}{'body_rules'}}) {
-      if( grep /\b$breg\b/ig, @$body ) {
-        $matched_concepts->{$key}++;
+      if( grep /\b$breg\b/ig, $bodyc ) {
+        $concept_count++;
       }
-
     }
-  }
-
-  my $concepts = '';
-
-  foreach my $key (keys %{$matched_concepts}) {
-    if ($matched_concepts->{$key} >= $opts->{conf}->{concepts_storage}{$key}{'count'}) {
+    if ($concept_count >= $opts->{conf}->{concepts_storage}{$key}{'count'}) {
       $concepts .= "$key ";
     }
   }
